@@ -5,7 +5,7 @@ import ThemeToggle from "./components/ThemeToggle";
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-base-100 text-base-content">
+    <div className="min-h-screen bg-base-100 text-base-content scroll-smooth transition-colors duration-300">
       <header className="flex justify-end p-4">
         <ThemeToggle />
       </header>
