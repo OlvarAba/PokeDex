@@ -13,7 +13,7 @@ const App = () => {
       <main className="p-4">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/:pokemon" element={<SearchedPokemon />} />
+          <Route path="/pokemon/:name" element={<SearchedPokemon />} />
         </Routes>
       </main>
     </div>

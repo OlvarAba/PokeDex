@@ -6,8 +6,8 @@ import Button from '../components/Button.jsx';
 const Header = () => {
     return (
         <div className="Home">
-            <header className="fixed flex top-4 left-1/2 -translate-x-1/2 p-4">
-                <nav className="flex items-center justify-between gap-4 bg-[#313131] p-4 rounded-xl">
+            <header className="sticky top-4 z-50 flex justify-center">
+                <nav className="flex items-center justify-between gap-4 bg-[#313131] p-4 rounded-xl h-16">
                     <img src={logo} alt="Pokedex"
                     className="w-50" />
                     <div className="search-container flex items-center gap-2">
