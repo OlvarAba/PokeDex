@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 import Button from "../components/Button";
-import PokemonCard from "../components/PokemonCard";
+import PokemonStats from "../components/PokemonStats";
+import EvolutionChain from "../components/EvolutionChain";
+
 
 const SearchedPokemon = () => {
   const { name } = useParams(); // <-- fixed here
@@ -10,8 +12,30 @@ const SearchedPokemon = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  // Colors
+  const colors = {
+    fire: "bg-red-500",
+    water: "bg-blue-500",
+    grass: "bg-green-500",
+    electric: "bg-yellow-500",
+    psychic: "bg-purple-500",
+    ice: "bg-cyan-500",
+    dragon: "bg-indigo-500",
+    dark: "bg-gray-800",
+    fairy: "bg-pink-500",
+    normal: "bg-gray-400",
+    fighting: "bg-orange-500",
+    flying: "bg-sky-300",
+    poison: "bg-violet-500",
+    ground: "bg-yellow-700",
+    rock: "bg-gray-600",
+    bug: "bg-lime-500",
+    ghost: "bg-purple-800",
+    steel: "bg-gray-500",  
+  };
+
   useEffect(() => {
-    const apiUrl = `https://pokeapi.co/api/v2/pokemon/${name}`; // <-- fixed here
+    const apiUrl = `https://pokeapi.co/api/v2/pokemon/${name}`; 
 
     async function fetchPokemon() {
       setLoading(true);
@@ -53,11 +77,31 @@ const SearchedPokemon = () => {
       <div className="pokemon-details text-center">
         <h1 className="text-3xl font-bold capitalize">{selectedPokemon.name}</h1>
         <img
-          src={selectedPokemon.sprites.front_default}
+          src={selectedPokemon.sprites.other['official-artwork'].front_default}
           alt={selectedPokemon.name}
-          className="mx-auto mt-4"
+          width={300}
+            height={300}
+          className="mx-auto mt-4 hover:scale-105 transition-transform duration-300"
         />
-        {/* Add more Pokémon info here */}
+         <div className="type">
+            {selectedPokemon.types.map((type, index) => (
+              <span
+                key={index}
+                className={`badge m-2 p-4 text-xl capitalize text-white ${
+                            colors[type.type.name] || "bg-gray-400"
+                        }`}
+              >
+                {type.type.name}
+              </span>
+            ))}
+         </div>
+         <div className="Pokemon-Stats">
+            <PokemonStats stats={selectedPokemon.stats} />
+         </div>
+            <div className="Evolution-Chain">
+            <EvolutionChain speciesUrl={selectedPokemon.species.url} />
+            </div>
+         
       </div>
     </div>
   );
