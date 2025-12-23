@@ -7,7 +7,7 @@ const Header = () => {
     return (
         <div className="Home">
             <header className="sticky top-4 z-50 flex justify-center">
-                <nav className="flex items-center justify-between gap-4 bg-base-300 p-4 rounded-xl h-30 max-w-4xl w-full">
+                <nav className=" glass flex items-center justify-between gap-4  p-4 rounded-xl h-30 max-w-4xl w-full shadow-lg">
                     <img src={logo} alt="Pokedex"
                     className="w-50" />
                     <div className="search-container flex items-center gap-2">

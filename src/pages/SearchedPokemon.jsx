@@ -83,11 +83,18 @@ const SearchedPokemon = () => {
             height={300}
           className="mx-auto mt-4 hover:scale-105 transition-transform duration-300"
         />
+        <div className="info">
+            <p className="text-xl mt-4 font-medium pb-4">
+            Height: {selectedPokemon.height / 10} m | Weight: {selectedPokemon.weight / 10} kg
+            </p>
+            
+           
+        </div>
          <div className="type">
             {selectedPokemon.types.map((type, index) => (
               <span
                 key={index}
-                className={`badge m-2 p-4 text-xl capitalize text-white ${
+                className={`badge m-2 p-4 text-xl capitalize text-white rounded-xl ${
                             colors[type.type.name] || "bg-gray-400"
                         }`}
               >
@@ -95,7 +102,7 @@ const SearchedPokemon = () => {
               </span>
             ))}
          </div>
-         <div className="Pokemon-Stats">
+         <div className="Pokemon-Stats bg-gray-100/10 rounded-lg p-2 mt-10 shadow-lg glass">
             <PokemonStats stats={selectedPokemon.stats} />
          </div>
             <div className="Evolution-Chain">

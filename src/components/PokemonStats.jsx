@@ -43,8 +43,8 @@ const PokemonStats = ({ stats }) => {
   }, []);
 
   return (
-    <div ref={containerRef} className="mt-10">
-      <h2 className="text-2xl font-bold mb-6 text-center">Stats</h2>
+    <div ref={containerRef} className="mt-4">
+      <h2 className="text-3xl font-bold mb-6 text-center">Stats</h2>
 
       <div className="grid grid-cols-6 gap-6 items-end">
         {stats.map((stat) => {
@@ -58,7 +58,7 @@ const PokemonStats = ({ stats }) => {
               className="flex flex-col items-center"
             >
               {/* Bar container */}
-              <div className="h-40 w-4 bg-base-300 rounded overflow-hidden relative">
+              <div className="h-40 w-5 bg-base-300 rounded-lg overflow-hidden relative">
                 <div
                   className={`absolute bottom-0 w-full rounded transition-all duration-1000 ease-out ${
                     statColors[stat.stat.name]
@@ -70,12 +70,12 @@ const PokemonStats = ({ stats }) => {
               </div>
 
               {/* Label */}
-              <span className="mt-2 text-sm font-semibold">
+              <span className="mt-2 font-semibold">
                 {statLabels[stat.stat.name]}
               </span>
 
               {/* Value */}
-              <span className="text-xs opacity-70">
+              <span className="opacity-70">
                 {stat.base_stat}
               </span>
             </div>
