@@ -10,6 +10,7 @@ import EvolutionChain from "../components/EvolutionChain";
 const SearchedPokemon = () => {
   const { name } = useParams(); 
   const [description, setDescription] = useState("");
+  const [isShiny, setIsShiny] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -87,6 +88,14 @@ const SearchedPokemon = () => {
      </div>
     );
 
+    const normalImage =
+  selectedPokemon.sprites.other.home.front_default ||
+  selectedPokemon.sprites.other["official-artwork"].front_default;
+
+const shinyImage =
+  selectedPokemon.sprites.other.home.front_shiny ||
+  selectedPokemon.sprites.other["official-artwork"].front_shiny;
+
   return (
     <div className="searched-pokemon p-4">
       <div className="searched-pokemon-header mb-4">
@@ -98,13 +107,19 @@ const SearchedPokemon = () => {
 
       <div className="pokemon-details text-center">
         <h1 className="text-4xl font-bold capitalize text-shadow-lg">{selectedPokemon.name}</h1>
+        <h4 className="italic "># {selectedPokemon.id.toString().padStart(3, '0')}</h4>
         <img
-          src={selectedPokemon.sprites.other['official-artwork'].front_default}
+          src={isShiny ? shinyImage : normalImage}
           alt={selectedPokemon.name}
           width={300}
             height={300}
           className="mx-auto mt-4 hover:scale-105 transition-transform duration-300"
         />
+        <button onClick={() => setIsShiny((prev) => !prev)}
+            className="btn btn-soft btn-primary btn-sm mt-4 p-5"
+            >
+                {isShiny ? "Normal Form" : "Shiny Form"}
+        </button>
         <div className="description p-6 mt-10 italic text-sm rounded-xl glass">
             {description}
         </div>

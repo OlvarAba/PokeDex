@@ -5,7 +5,7 @@ const Card = ({ data }) => {
 
     const urlParts = data.url.split('/');
     const pokeId = urlParts[urlParts.length - 2];
-    const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeId}.png`;
+const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokeId}.png`;    
 
     return (
        <div className="pokemon-card card glass transition-shadow duration-300 hover:scale-105 ">
@@ -15,7 +15,7 @@ const Card = ({ data }) => {
             />
             
             <div className="text">
-                <h4 className="name font-bold text-center text-2xl text-primary capitalize">
+                <h4 className="name font-bold text-center text-2xl text-primary capitalize text-shadow-md">
                     {data.name}
                 </h4>
             </div>
