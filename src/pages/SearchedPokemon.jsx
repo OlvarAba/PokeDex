@@ -6,8 +6,10 @@ import PokemonStats from "../components/PokemonStats";
 import EvolutionChain from "../components/EvolutionChain";
 
 
+
 const SearchedPokemon = () => {
-  const { name } = useParams(); // <-- fixed here
+  const { name } = useParams(); 
+  const [description, setDescription] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -48,6 +50,18 @@ const SearchedPokemon = () => {
 
         const data = await response.json();
         setSelectedPokemon(data);
+        const speciesResponse = await fetch(data.species.url);
+      const speciesData = await speciesResponse.json();
+
+      const englishEntry = speciesData.flavor_text_entries.find(
+        (entry) => entry.language.name === "en"
+      );
+
+      setDescription(
+        englishEntry
+          ? englishEntry.flavor_text.replace(/\f|\n/g, " ")
+          : "No description available."
+      );
       } catch (err) {
         setError(true);
       } finally {
@@ -55,15 +69,22 @@ const SearchedPokemon = () => {
       }
     }
 
+    
+
     fetchPokemon();
   }, [name]);
 
   if (loading) return <LoadingScreen />;
   if (error)
     return (
+        <div className="flex flex-col items-center mt-20 space-y-6">
       <p className="text-center text-2xl font-bold mt-20">
         An error occurred while fetching the Pokémon data.
       </p>
+      <Link to="/">
+        <Button label="Back to Home" />
+      </Link>
+     </div>
     );
 
   return (
@@ -72,10 +93,11 @@ const SearchedPokemon = () => {
         <Link to="/">
           <Button label="Back" />
         </Link>
+       
       </div>
 
       <div className="pokemon-details text-center">
-        <h1 className="text-3xl font-bold capitalize">{selectedPokemon.name}</h1>
+        <h1 className="text-4xl font-bold capitalize text-shadow-lg">{selectedPokemon.name}</h1>
         <img
           src={selectedPokemon.sprites.other['official-artwork'].front_default}
           alt={selectedPokemon.name}
@@ -83,13 +105,15 @@ const SearchedPokemon = () => {
             height={300}
           className="mx-auto mt-4 hover:scale-105 transition-transform duration-300"
         />
+        <div className="description p-6 mt-10 italic text-sm rounded-xl glass">
+            {description}
+        </div>
         <div className="info">
             <p className="text-xl mt-4 font-medium pb-4">
             Height: {selectedPokemon.height / 10} m | Weight: {selectedPokemon.weight / 10} kg
-            </p>
-            
-           
+            </p> 
         </div>
+        
          <div className="type">
             {selectedPokemon.types.map((type, index) => (
               <span

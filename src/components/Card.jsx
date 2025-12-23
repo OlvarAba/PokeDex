@@ -19,6 +19,9 @@ const Card = ({ data }) => {
                     {data.name}
                 </h4>
             </div>
+            <div>
+                
+            </div>
         </div>
        </div>
     )
