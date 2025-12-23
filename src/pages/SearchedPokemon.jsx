@@ -107,7 +107,7 @@ const shinyImage =
 
       <div className="pokemon-details text-center">
         <h1 className="text-4xl font-bold capitalize text-shadow-lg">{selectedPokemon.name}</h1>
-        <h4 className="italic "># {selectedPokemon.id.toString().padStart(3, '0')}</h4>
+        <h4 className="italic mt-4"># {selectedPokemon.id.toString().padStart(3, '0')}</h4>
         <img
           src={isShiny ? shinyImage : normalImage}
           alt={selectedPokemon.name}
